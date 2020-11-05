@@ -1,20 +1,27 @@
 <template>
   <div>
+    <ul>
+      <li>
+        <button @click.prevent="$router.push({ path: '/demo/tpl' })">
+          下一頁
+        </button>
+      </li>
+      <li><button @click.prevent="$router.push('/')">首頁</button></li>
+      <li v-for="(item, index) in 1" :key="index">
+        <nuxt-link :to="{ path: `/demo/${item}` }">{{ item }}</nuxt-link>
+      </li>
+      <!-- <li><router-link :to="{ path: '/demo/tpl' }">下一頁</router-link></li> -->
+      <!-- <li><nuxt-link to="/demo/tpl">下一頁</nuxt-link></li> -->
+      <!-- <li><nuxt-link :to="{ path: '/' }">首頁</nuxt-link></li> -->
+    </ul>
     <Nuxt />
   </div>
 </template>
 
-<style>
+<style lang="scss">
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

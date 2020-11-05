@@ -15,6 +15,16 @@
   </svg>
 </template>
 
+<script>
+export default {
+  head(){
+    return {
+      title: "組件"
+    }
+  }
+}
+</script>
+
 <style>
 .NuxtLogo {
   animation: 1s appear;

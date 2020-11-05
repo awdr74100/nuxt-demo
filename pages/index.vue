@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <Logo />
-      <h1 class="title">
+      <h1 class="title text-danger">
         nuxt-demo
       </h1>
       <div class="links">
@@ -28,7 +28,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head(){
+    return {
+      title: '首頁',
+    }
+  }
+}
 </script>
 
 <style>
@@ -55,7 +61,7 @@ export default {}
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
+  /* color: #35495e; */
   letter-spacing: 1px;
 }
 

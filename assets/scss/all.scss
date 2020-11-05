@@ -1,0 +1,12 @@
+@import "./helpers/image";
+@import "./helpers/variables";
+
+.text-primary {
+  color: map-get($theme-colors, "primary");
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
