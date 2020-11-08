@@ -1,88 +1,21 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title text-danger">
-        nuxt-demo
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="123">
+    <Header />
+    <CourseList />
+    <Footer />
   </div>
 </template>
 
 <script>
+import Header from "~/components/Header/Header";
+import Footer from "~/components/Footer/Footer";
+import CourseList from "~/components/CourseList/CourseList";
+
 export default {
-  head() {
-    return {
-      title: "首頁"
-    };
-  },
-  beforeCreate() {
-    console.log("index beforeCreate");
-  },
-  created() {
-    console.log("index created");
-  },
-  beforeMount() {
-    console.log("index beforeMount");
-  },
-  mounted() {
-    console.log(window === global);
-    console.log(global);
-    console.log("index mounted");
-  },
-  destroyed() {
-    console.log("index destroyed");
+  components: {
+    Header,
+    Footer,
+    CourseList
   }
 };
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  /* color: #35495e; */
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

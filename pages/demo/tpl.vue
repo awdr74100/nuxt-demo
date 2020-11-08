@@ -1,17 +1,17 @@
 <template>
   <div>
     <logo />
-    <h1 class="text-danger">
+    <h1 class="has-text-primary">
       {{ title }}
     </h1>
     <h2>
       {{ h2 }}
     </h2>
-    <h2 class="text-primary">
+    <h2 >
       {{ demoH2 }}
     </h2>
-    <div class="d-flex">
-      <div class="img"></div>
+    <div>
+      <div></div>
     </div>
     <i class="fas fa-car"></i>
 
@@ -86,9 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  color: red;
-}
 // @import "@/assets/scss/all.scss";
 
 // @import "~/assets/scss/all.scss";

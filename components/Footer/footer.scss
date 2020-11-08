@@ -1,0 +1,25 @@
+@import "~assets/scss/helpers/variables.scss";
+
+.footer {
+  background: #dfe4e5;
+  color: black;
+  padding: 2rem 0;
+  &.is_course {
+    width: 75%;
+  }
+}
+.footer_logo {
+  width: 190px;
+  margin-bottom: 10px;
+}
+.icon_a {
+  color: #3d3d3d;
+}
+
+@media screen and (max-width: 1023px) {
+  .footer {
+    &.is_course {
+      width: 100%;
+    }
+  }
+}
