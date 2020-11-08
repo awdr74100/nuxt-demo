@@ -29,12 +29,29 @@
 
 <script>
 export default {
-  head(){
+  head() {
     return {
-      title: '首頁',
-    }
+      title: "首頁"
+    };
+  },
+  beforeCreate() {
+    console.log("index beforeCreate");
+  },
+  created() {
+    console.log("index created");
+  },
+  beforeMount() {
+    console.log("index beforeMount");
+  },
+  mounted() {
+    console.log(window === global);
+    console.log(global);
+    console.log("index mounted");
+  },
+  destroyed() {
+    console.log("index destroyed");
   }
-}
+};
 </script>
 
 <style>
@@ -48,16 +65,8 @@ export default {
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
