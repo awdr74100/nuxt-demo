@@ -1,0 +1,98 @@
+@import "~assets/scss/helpers/variables.scss";
+
+.modal-card {
+  background-color: #fff;
+  max-width: 430px;
+  border-radius: 0px;
+}
+.login.modal-card {
+  max-width: 430px;
+}
+.button_a {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 17px;
+}
+button.is-fullwidth {
+  width: 100%;
+  margin: 0 auto;
+}
+.google {
+  background: rgb(209, 72, 54);
+  color: #fff;
+}
+hr {
+  background-color: #e8e8e8;
+}
+hr.login-or {
+  margin: 10px auto;
+  width: 91%;
+  margin-top: 27px;
+  position: relative;
+  overflow: initial;
+  &::before {
+    content: "or";
+    color: #c3c3c3;
+    position: absolute;
+    left: 50%;
+    background-color: #fff;
+    display: inline-block;
+    z-index: 2;
+    top: -14px;
+    width: 30px;
+    margin-left: -15px;
+    text-align: center;
+  }
+}
+.top_header {
+  background-color: #fff;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  color: #757575;
+}
+.modal-card-body {
+  margin-top: -10px;
+}
+.social {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.reg_login.icon {
+  margin-right: 5px;
+  position: relative;
+  top: 1px;
+}
+.reg_login_button {
+  button {
+    border-radius: 20px;
+    margin-top: 17px;
+  }
+  button.reg {
+    background-color: $primary;
+    color: #fff;
+    width: 130px;
+  }
+}
+.bottom_center {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  a:hover {
+    color: #1b1bef;
+  }
+}
+@media screen and (max-width: 600px) {
+  .button_a {
+    width: 80%;
+  }
+  .modal-card {
+    max-width: 90%;
+  }
+  .login.modal-card {
+    max-width: 90%;
+  }
+}
+::placeholder {
+  color: #c5c5c5;
+}
