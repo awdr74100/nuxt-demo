@@ -62,6 +62,11 @@ export default {
     //     }
     //   }
     // }
+  },
+  loading: { color: "#00c58e", height: "2px", duration: 5000 },
+  transition: {
+    name: "layout",
+    mode: "out-in"
   }
   // router: {
   //   extendRoutes(routes, resolve) {
