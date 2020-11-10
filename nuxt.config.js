@@ -64,10 +64,16 @@ export default {
     // }
   },
   loading: { color: "#00c58e", height: "2px", duration: 5000 },
-  transition: {
+  pageTransition: {
     name: "layout",
     mode: "out-in"
-  }
+  },
+  serverMiddleware: [
+    {
+      path: "/api",
+      handler: "~/server/api.js"
+    }
+  ]
   // router: {
   //   extendRoutes(routes, resolve) {
   //     // console.log(routes);
