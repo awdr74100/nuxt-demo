@@ -3,39 +3,36 @@
     <div class="columns is-centered is-multiline">
       <div
         class="card column is-5-tablet is-3-desktop"
-        v-for="n in 10"
-        :key="n"
+        v-for="(item, index) in courses"
+        :key="index"
       >
         <div class="course_item">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img
-                src="https://bulma.io/images/placeholders/1280x960.png"
-                alt="課程名稱"
-              />
+              <img :src="item.img" :alt="item.name" />
             </figure>
           </div>
           <div class="course_title_parent">
             <div class="course_title is-clearfix">
-              <h2 class="is-pulled-left">課程名稱</h2>
+              <h2 class="is-pulled-left">{{ item.name }}</h2>
             </div>
           </div>
           <div class="description">
-            課程介紹
+            {{ item.description }}
           </div>
           <nuxt-link
             class="details"
             :to="{
               name: 'course-id',
               params: {
-                id: n
+                id: item.id
               }
             }"
           >
           </nuxt-link>
         </div>
       </div>
-      <div v-if="1 == 2" class="section">
+      <div v-if="courses.length == 0" class="section">
         <p>沒有發現課程!!</p>
       </div>
     </div>
@@ -45,6 +42,12 @@
 <script>
 export default {
   name: "CourseList",
+  props: {
+    courses: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {};
   },

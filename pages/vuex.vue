@@ -27,7 +27,7 @@ export default {
     loginModalSubmit({ modalTyple, name, email, password }) {
       console.log(modalTyple, name, email, password);
     },
-    ...mapActions(["delayIncrease"]),
+    ...mapActions(["delayIncrease", "getData"]),
     ...mapMutations(["increase", "decrease"])
     // increase() {
     //   this.$store.commit("increase", 10);
@@ -46,7 +46,11 @@ export default {
     // if (!process.client) return;
     // console.log(process.env.baseUrl);
     console.log(123);
+    // console.log(this);
     console.log(process.env.NODE_ENV);
+    if (process) {
+      this.getData();
+    }
     // console.log(this.isSignin);
     // this.$store.commit("increase", 10);
   }

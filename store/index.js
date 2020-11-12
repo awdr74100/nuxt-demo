@@ -28,7 +28,9 @@
 // });
 
 export const state = () => ({
-  counter: 0
+  counter: 0,
+  data: {},
+  courses: []
 });
 
 export const actions = {
@@ -36,6 +38,14 @@ export const actions = {
     setTimeout(() => {
       commit("increase", num);
     }, 2000);
+  },
+  async getData({ commit }) {
+    const { data } = await this.$axios.get("/api/test");
+    commit("setData", data);
+  },
+  async getCourses({ commit }) {
+    const { data } = await this.$axios.get("/api/courses");
+    commit("set_courses", data);
   }
 };
 
@@ -45,6 +55,12 @@ export const mutations = {
   },
   decrease(state, num) {
     state.counter -= num;
+  },
+  setData(state, data) {
+    state.data = data;
+  },
+  set_courses: (state, payload) => {
+    state.courses = payload.courses;
   }
 };
 
