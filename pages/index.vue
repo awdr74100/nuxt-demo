@@ -15,6 +15,9 @@ export default {
     CourseList
   },
   async asyncData({ $axios }) {
+    // console.log(process.client);
+    // console.log(process.server);
+    console.log("async data active");
     const { data } = await $axios.get("/api/test");
     return { title: data.title, message: data.message };
   },
@@ -31,6 +34,9 @@ export default {
     }
   },
   async created() {
+    // console.log(process);
+    // console.log(process.client);
+    // console.log(process.server);
     // const { data } = await this.$axios.get("/api/test");
     // console.log(data);
   }

@@ -94,6 +94,7 @@
                   type="password"
                   placeholder="Password*"
                   v-model="password"
+                  autocomplete="on"
                 />
                 <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
@@ -110,6 +111,7 @@
                   type="password"
                   placeholder="Repeat Password*"
                   v-model="repeatPassword"
+                  autocomplete="on"
                 />
                 <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
