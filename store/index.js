@@ -41,7 +41,6 @@ export const actions = {
 
 export const mutations = {
   increase(state, num) {
-    console.dir(this.$axios);
     state.counter += num;
   },
   decrease(state, num) {
