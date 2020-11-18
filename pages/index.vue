@@ -17,7 +17,6 @@ export default {
     CourseList
   },
   async fetch(context) {
-
     await context.store.dispatch("getCourses");
     // const { data } = await context.$axios.get("/api/courses");
     // context.store.commit("set_courses", { ...data });
@@ -28,7 +27,7 @@ export default {
     // });
   },
   async asyncData(context) {
-
+    // await context.store.dispatch("getCourses");
     // const { data } = await context.$axios.get("/api/courses");
     // context.store.commit("set_courses", { ...data });
     // return { title: "Roya" };
@@ -54,7 +53,6 @@ export default {
     ...mapState(["courses"])
   },
   async created() {
-
     if (process.client) {
       // this.$axios("api/courses").then(data => {
       //   this.$store.commit("set_courses", {
