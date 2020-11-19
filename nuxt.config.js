@@ -32,6 +32,9 @@ export default {
     },
     {
       src: "@/plugins/v-tooltip.js"
+    },
+    {
+      src: "@/plugins/axios.js"
     }
   ],
 
@@ -43,11 +46,11 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ["@nuxtjs/axios"],
-  axios: { proxy: true },
+  // axios: { proxy: true },
   // proxy: ["http://localhost:3500/api"],
-  proxy: {
-    "/api": "http://localhost:3500"
-  },
+  // proxy: {
+  //   "/api": "http://localhost:3500"
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

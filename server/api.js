@@ -1,11 +1,20 @@
 const express = require("express");
 const app = express();
+const axios = require("axios").default;
 
 // app.get("/", (req, res) => {
 //   res.send({ message: "Bang" });
 // });
 app.get("/test", (req, res) => {
   res.send({ title: "Roya", message: "Hello World" });
+});
+
+app.post("/cookie", async (req, res) => {
+  const {
+    data: { results }
+  } = await axios.get("https://randomuser.me/api/");
+  res.cookie("auth", "123456789", { maxAge: 100000, httpOnly: true });
+  res.send({ email: results[0].email });
 });
 
 app.get("/courses", (req, res) => {
