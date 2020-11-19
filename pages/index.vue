@@ -54,6 +54,14 @@ export default {
   },
   async created() {
     if (process.client) {
+      // const res1 = await this.$axios.get("http://localhost:3500");
+      // console.log(res1.data);
+      const res2 = await this.$axios.get("/api");
+      console.log(res2.data);
+      const res3 = await this.$axios.patch("/api", {
+        headers: { Authorization: "Basic 123" }
+      });
+      console.log(res3.data);
       // this.$axios("api/courses").then(data => {
       //   this.$store.commit("set_courses", {
       //     ...data.data

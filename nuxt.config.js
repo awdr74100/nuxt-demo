@@ -43,6 +43,11 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ["@nuxtjs/axios"],
+  axios: { proxy: true },
+  // proxy: ["http://localhost:3500/api"],
+  proxy: {
+    "/api": "http://localhost:3500"
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
@@ -74,6 +79,7 @@ export default {
       handler: "~/server/api.js"
     }
   ]
+
   // router: {
   //   extendRoutes(routes, resolve) {
   //     // console.log(routes);
