@@ -65,6 +65,16 @@ export default {
       console.log(res3.data);
       const res4 = await this.$axios.post("/api/cookie");
       console.log(res4.data);
+      const res5 = await this.$axios.post(
+        "http://locahlost:3500/urlencoded",
+        new URLSearchParams().append("message", "奕濡"),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+      );
+      console.log(res5.data);
       // this.$axios("api/courses").then(data => {
       //   this.$store.commit("set_courses", {
       //     ...data.data
