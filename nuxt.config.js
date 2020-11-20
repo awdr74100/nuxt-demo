@@ -45,7 +45,10 @@ export default {
   buildModules: [],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/style-resources"],
+  styleResources: {
+    scss: ["~assets/scss/helpers/_variables.scss"]
+  },
   // axios: { proxy: true },
   // proxy: ["http://localhost:3500/api"],
   // proxy: {

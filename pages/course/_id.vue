@@ -94,7 +94,7 @@ export default {
     };
   },
   async asyncData() {
-    await sleep(500);
+    // await sleep(500);
   },
   created() {},
   mounted() {
