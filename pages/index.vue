@@ -26,7 +26,7 @@ export default {
     //   });
     // });
   },
-  async asyncData(context) {
+  async asyncData({ $axios }) {
     // await context.store.dispatch("getCourses");
     // const { data } = await context.$axios.get("/api/courses");
     // context.store.commit("set_courses", { ...data });
@@ -54,6 +54,12 @@ export default {
   },
   async created() {
     if (process.client) {
+      const res1 = await this.$axios.patch("/api/aaa");
+      console.log(res1.data);
+      const res2 = await this.$axios.patch("/api");
+      console.log(res2.data);
+      const res3 = await this.$axios.post("/api/urlencoded", { message: "Bang" });
+      console.log(res3.data);
       // const res1 = await this.$axios.get("http://localhost:3500");
       // console.log(res1.data);
       // const res2 = await this.$axios.get("http://localhost:3500/api");

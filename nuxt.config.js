@@ -49,10 +49,15 @@ export default {
   styleResources: {
     scss: ["~assets/scss/helpers/_variables.scss"]
   },
-  // axios: { proxy: true },
-  // proxy: ["http://localhost:3500/api"],
+  axios: { proxy: true },
+  // proxy:['http://localhost:3500/api/aaa'],
+  proxy: {
+    "/api": {
+      target: "http://localhost:3500"
+    }
+  },
   // proxy: {
-  //   "/api": "http://localhost:3500"
+  //   "/api": "http://localhost:3500/api"
   // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
