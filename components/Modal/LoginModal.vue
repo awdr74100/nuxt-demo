@@ -11,7 +11,7 @@
         </p>
         <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
-      <a class="button_a">
+      <a href="/auth" class="button_a">
         <button class="button is-fullwidth google">
           <span class="reg_login icon is-small">
             <i class="fab fa-google"></i>

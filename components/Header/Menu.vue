@@ -27,11 +27,11 @@
           <img
             style="max-height: inherit;"
             class="is-rounded"
-            src="https://bulma.io/images/placeholders/128x128.png"
+            :src="getUserPicture"
           />
         </figure>
         <span style=" vertical-align: top;line-height: 32px;">
-          wayne
+          {{ getUserName }}
         </span>
       </a>
       <div class="navbar-dropdown is-boxed">
@@ -54,11 +54,19 @@ export default {
   computed: {
     isUserLoggedIn() {
       return this.$store.state.isUserLoggedIn;
+    },
+    getUserName() {
+      return this.$store.state.userName;
+    },
+    getUserPicture() {
+      if (!this.$store.state.userPicture)
+        return "https://bulma.io/images/placeholders/128x128.png";
+      return this.$store.state.userPicture;
     }
   },
   methods: {
     logout() {
-      this.$router.push({ name: "index" });
+      this.$store.commit("setUserlogout");
     }
   }
 };

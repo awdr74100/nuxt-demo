@@ -88,6 +88,10 @@ export default {
     {
       path: "/api",
       handler: "~/server/api.js"
+    },
+    {
+      path: "/auth",
+      handler: "~/server/auth.js"
     }
   ],
   env: {
