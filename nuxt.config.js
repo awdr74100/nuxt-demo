@@ -89,7 +89,10 @@ export default {
       path: "/api",
       handler: "~/server/api.js"
     }
-  ]
+  ],
+  env: {
+    firebaseApiKey: "AIzaSyB9-qd-I7C8aSfFQ6N75c3Vd6QvIkYvDqM"
+  }
 
   // router: {
   //   extendRoutes(routes, resolve) {

@@ -1,0 +1,8 @@
+POST https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB9-qd-I7C8aSfFQ6N75c3Vd6QvIkYvDqM
+Content-Type: application/json
+
+{
+  "email": "root@gmail.com",
+  "password": "zxcv75395100",
+  "returnSecureToken": true
+}

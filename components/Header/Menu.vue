@@ -3,12 +3,15 @@
     <div v-if="!isUserLoggedIn" class="navbar-item">
       <div class="field is-grouped">
         <p class="control">
-          <a class="button is-rounded is-small">
+          <a class="button is-rounded is-small" @click="$emit('login-click')">
             <span>登入</span>
           </a>
         </p>
         <p class="control">
-          <a class="button is-primary is-rounded is-small">
+          <a
+            class="button is-primary is-rounded is-small"
+            @click="$emit('registered-click')"
+          >
             <span>註冊</span>
           </a>
         </p>
@@ -50,7 +53,7 @@ export default {
   },
   computed: {
     isUserLoggedIn() {
-      return true;
+      return this.$store.state.isUserLoggedIn;
     }
   },
   methods: {

@@ -32,6 +32,7 @@
                   placeholder="Your email"
                   name="emailName"
                   v-model="email"
+                  autocomplete="on"
                 />
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
@@ -47,6 +48,7 @@
                   placeholder="Your password"
                   name="passwordName"
                   v-model="password"
+                  autocomplete="on"
                 />
                 <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
@@ -65,6 +67,7 @@
                   type="text"
                   placeholder="Name*"
                   v-model="name"
+                  autocomplete="on"
                 />
                 <span class="icon is-small is-left">
                   <i class="fa fa-user"></i>
@@ -80,6 +83,7 @@
                   placeholder="Email*"
                   name="emailName"
                   v-model="email"
+                  autocomplete="on"
                 />
                 <span class="icon is-small is-left">
                   <i class="fa fa-envelope"></i>
@@ -205,7 +209,8 @@ export default {
       });
     },
     closeModal() {
-      this.isOpenModal = false;
+      this.$emit("update:openModal", false);
+      // this.isOpenModal = false;
     }
   }
 };

@@ -2,7 +2,7 @@ export default ({ $axios, redirect }) => {
   $axios.onRequest(config => {
     return {
       ...config,
-      withCredentials: true
+      // withCredentials: true
       // headers: {
       //   Authorization: "Basic 123"
       // }

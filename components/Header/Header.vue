@@ -29,12 +29,18 @@
 
         <!-- For mobile and tablet -->
         <div v-show="isMenuOpen" class="navbar-end is-hidden-tablet">
-          <Menu></Menu>
+          <Menu
+            @login-click="$emit('login-click')"
+            @registered-click="$emit('registered-click')"
+          ></Menu>
         </div>
 
         <!-- For desktop -->
         <div class="navbar-end is-hidden-mobile">
-          <Menu></Menu>
+          <Menu
+            @login-click="$emit('login-click')"
+            @registered-click="$emit('registered-click')"
+          ></Menu>
         </div>
       </nav>
     </div>
