@@ -40,8 +40,8 @@ export default {
   },
   async created() {
     if (process.client) {
-      const res4 = await this.$axios.post("/api/cookie");
-      console.log(res4.data);
+      // const res4 = await this.$axios.post("/api/cookie");
+      // console.log(res4.data);
       // console.log(process.env.NODE_ENV);
       // console.log(process.env.API_KEY);
     }

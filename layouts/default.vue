@@ -17,8 +17,6 @@
 import Header from "~/components/Header/Header";
 import Footer from "~/components/Footer/Footer";
 import LoginModal from "~/components/Modal/LoginModal";
-import jwtDecode from "jwt-decode";
-import Cookie from "js-cookie";
 
 export default {
   asyncData() {
@@ -65,27 +63,27 @@ export default {
   },
   mounted() {
     if (this.$route.query.id_token && this.$route.query.refresh_token) {
-      let id_token_Decode = jwtDecode(this.$route.query.id_token);
-      this.$store.commit("setUserLoggedIn", {
-        id_token: this.$route.query.id_token,
-        refresh_token: this.$route.query.refresh_token,
-        userUid: id_token_Decode.user_id,
-        userPicture: id_token_Decode.picture,
-        userName: id_token_Decode.name
-      });
+      // let id_token_Decode = jwtDecode(this.$route.query.id_token);
+      // this.$store.commit("setUserLoggedIn", {
+      //   id_token: this.$route.query.id_token,
+      //   refresh_token: this.$route.query.refresh_token,
+      //   userUid: id_token_Decode.user_id,
+      //   userPicture: id_token_Decode.picture,
+      //   userName: id_token_Decode.name
+      // });
       // console.log(window.location.pathname);
       window.history.replaceState(null, null, window.location.pathname);
       return;
     }
-    if (Cookie.get("id_token")) {
-      this.$store.commit("setUserLoggedIn", {
-        id_token: Cookie.get("id_token"),
-        refresh_token: Cookie.get("refresh_token"),
-        userUid: Cookie.get("userUid"),
-        userPicture: Cookie.get("userPicture"),
-        userName: Cookie.get("userName")
-      });
-    }
+    // if (Cookie.get("id_token")) {
+    //   this.$store.commit("setUserLoggedIn", {
+    //     id_token: Cookie.get("id_token"),
+    //     refresh_token: Cookie.get("refresh_token"),
+    //     userUid: Cookie.get("userUid"),
+    //     userPicture: Cookie.get("userPicture"),
+    //     userName: Cookie.get("userName")
+    //   });
+    // }
   }
 };
 </script>
