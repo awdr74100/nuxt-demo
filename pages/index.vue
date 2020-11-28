@@ -13,8 +13,14 @@ export default {
   components: {
     CourseList
   },
-  async fetch(context) {
-    await context.store.dispatch("getCourses");
+  asyncData() {
+    // console.log("pages asyncdata");
+    // console.log(this);
+  },
+  async fetch() {
+    // console.log("pages fetch");
+    await this.$store.dispatch("getCourses");
+    // await context.store.dispatch("getCourses");
   },
   async asyncData({ $axios }) {},
   data() {
@@ -36,8 +42,8 @@ export default {
     if (process.client) {
       const res4 = await this.$axios.post("/api/cookie");
       console.log(res4.data);
-      console.log(process.env.NODE_ENV);
-      console.log(process.env.API_KEY);
+      // console.log(process.env.NODE_ENV);
+      // console.log(process.env.API_KEY);
     }
   }
 };

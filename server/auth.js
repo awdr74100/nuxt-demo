@@ -51,8 +51,8 @@ app.get("/google", async (req, res) => {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   };
-  console.log(req.url);
-  console.log(req.query);
+  // console.log(req.url);
+  // console.log(req.query);
   const token_option = {
     code: req.query.code,
     client_id: google_client_id,
@@ -62,7 +62,7 @@ app.get("/google", async (req, res) => {
     redirect_uri: process_url + "/auth/google"
   };
   let result = await axios.post(api_url, qs.stringify(token_option), config);
-  console.log(result.data);
+  // console.log(result.data);
   const id_token = result.data.id_token; //jwt token
   const access_token = result.data.access_token;
 
@@ -82,6 +82,7 @@ app.get("/google", async (req, res) => {
     returnSecureToken: true,
     returnIdpCredential: true
   });
+  // console.log(firebase_result.data);
   //要傳給前端的資訊
   const firebase_id_token = firebase_result.data.idToken;
   const refresh_token = firebase_result.data.refreshToken;

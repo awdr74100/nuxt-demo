@@ -21,6 +21,14 @@ import jwtDecode from "jwt-decode";
 import Cookie from "js-cookie";
 
 export default {
+  asyncData() {
+    // console.log("layout asyncdata");
+    // console.log(this.message);
+  },
+  fetch() {
+    // console.log("layout fetch");
+    // console.log(this.message);
+  },
   components: {
     Header,
     Footer,
@@ -29,7 +37,8 @@ export default {
   data() {
     return {
       openModal: false,
-      modalTyple: ""
+      modalTyple: "",
+      message: "Hello World"
     };
   },
   methods: {
@@ -57,7 +66,6 @@ export default {
   mounted() {
     if (this.$route.query.id_token && this.$route.query.refresh_token) {
       let id_token_Decode = jwtDecode(this.$route.query.id_token);
-      console.log(id_token_Decode);
       this.$store.commit("setUserLoggedIn", {
         id_token: this.$route.query.id_token,
         refresh_token: this.$route.query.refresh_token,
@@ -65,6 +73,7 @@ export default {
         userPicture: id_token_Decode.picture,
         userName: id_token_Decode.name
       });
+      // console.log(window.location.pathname);
       window.history.replaceState(null, null, window.location.pathname);
       return;
     }
