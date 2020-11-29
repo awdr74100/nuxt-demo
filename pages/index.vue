@@ -13,16 +13,30 @@ export default {
   components: {
     CourseList
   },
+  middleware: ["aa"],
   asyncData() {
+    // console.log("asyncData Active", new Date().getTime());
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     console.log("asyncData Promise", new Date().getTime());
+    //     resolve({});
+    //   }, 600);
+    // });
     // console.log("pages asyncdata");
     // console.log(this);
   },
   async fetch() {
     // console.log("pages fetch");
+    // console.log("new fetch Active", new Date().getTime());
     await this.$store.dispatch("getCourses");
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     console.log("fetch Promise", new Date().getTime());
+    //     resolve({});
+    //   }, 600);
+    // });
     // await context.store.dispatch("getCourses");
   },
-  async asyncData({ $axios }) {},
   data() {
     return {
       title: "unknown",
@@ -38,13 +52,23 @@ export default {
   computed: {
     ...mapState(["courses"])
   },
-  async created() {
-    if (process.client) {
-      // const res4 = await this.$axios.post("/api/cookie");
-      // console.log(res4.data);
-      // console.log(process.env.NODE_ENV);
-      // console.log(process.env.API_KEY);
-    }
-  }
+  // beforeCreate() {
+  //   console.log("beforeCreate Active", new Date().getTime());
+  // },
+  // async created() {
+  //   console.log("created Active", new Date().getTime());
+  //   if (process.client) {
+  //     // const res4 = await this.$axios.post("/api/cookie");
+  //     // console.log(res4.data);
+  //     // console.log(process.env.NODE_ENV);
+  //     // console.log(process.env.API_KEY);
+  //   }
+  // },
+  // beforeMount() {
+  //   console.log("beforeMount Active", new Date().getTime());
+  // },
+  // mounted() {
+  //   console.log("mounted Active", new Date().getTime());
+  // }
 };
 </script>

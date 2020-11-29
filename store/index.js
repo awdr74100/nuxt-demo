@@ -20,6 +20,7 @@ export const actions = {
     commit("set_courses", data);
   },
   nuxtServerInit({ commit }, context) {
+    // console.log("nuxtServerInit Active", new Date().getTime());
     //這邊是給 Oauth 回來時提早觸發
     if (context.query.id_token && context.query.refresh_token) {
       const id_token_Decode = jwtDecode(context.query.id_token);
@@ -67,10 +68,10 @@ export const mutations = {
   setData(state, data) {
     state.data = data;
   },
-  set_courses: (state, payload) => {
+  set_courses(state, payload) {
     state.courses = payload.courses;
   },
-  setUserLoggedIn: (state, payload) => {
+  setUserLoggedIn(state, payload) {
     state.isUserLoggedIn = true;
     state.userPicture =
       payload.userPicture || "https://bulma.io/images/placeholders/128x128.png";
@@ -82,7 +83,7 @@ export const mutations = {
     // Cookie.set("userPicture", state.userPicture);
     // Cookie.set("userName", state.userName);
   },
-  setUserlogout: (state, payload) => {
+  setUserlogout(state, payload) {
     state.isUserLoggedIn = false;
     state.userPicture = "";
     state.userName = "";
@@ -91,7 +92,8 @@ export const mutations = {
     Cookie.remove("userUid");
     Cookie.remove("userPicture");
     Cookie.remove("userName");
-    $nuxt.$router.push({ name: "index" });
+    this.$router.push({ name: "index" });
+    // $nuxt.$router.push({ name: "index" });
   }
 };
 

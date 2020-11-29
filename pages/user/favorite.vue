@@ -20,9 +20,13 @@
 import CourseList from "~/components/CourseList/CourseList.vue";
 
 export default {
+  meta: {
+    auth: true
+  },
   methods: {},
   components: {
     CourseList
-  }
+  },
+  middleware: ["auth", "aa"]
 };
 </script>
