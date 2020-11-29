@@ -1,5 +1,6 @@
 <template>
   <div>
+     <nuxt-link to="/demo/7788">連結</nuxt-link>
     <CourseList :courses="courses" />
   </div>
 </template>
@@ -13,7 +14,6 @@ export default {
   components: {
     CourseList
   },
-  middleware: ["aa"],
   asyncData() {
     // console.log("asyncData Active", new Date().getTime());
     // return new Promise((resolve, reject) => {
