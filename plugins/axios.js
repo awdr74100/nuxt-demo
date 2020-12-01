@@ -1,20 +1,31 @@
-export default ({ $axios, redirect }) => {
+export default ({ $axios, redirect, error, $config }) => {
+  // $axios.onRequest(config => {
+  //   return {
+  //     ...config
+  //     // withCredentials: true
+  //     // headers: {
+  //     //   Authorization: "Basic 123"
+  //     // }
+  //   };
+  //   // console.log("Making request to " + config.url);
+  //   // console.log(config);
+  // });
+
+  // $axios.setHeader('Authorization', '123');//也可以用這種方式設定
+
+  //每次請求時全域觸發
+  // $axios.setBaseURL($config.API_URL);
+  $axios.setBaseURL(process.env.API_URL);
   $axios.onRequest(config => {
-    return {
-      ...config,
-      // withCredentials: true
-      // headers: {
-      //   Authorization: "Basic 123"
-      // }
-    };
-    // console.log("Making request to " + config.url);
-    // console.log(config);
+    config.params = { key: process.env.FIREBASE_API_KEY };
+    config.withCredentials = true;
   });
 
-  // $axios.onError(error => {
-  //   const code = parseInt(error.response && error.response.status);
-  //   if (code === 400) {
-  //     redirect("/400");
-  //   }
-  // });
+  $axios.onResponse(config => {});
+  $axios.onError(data => {
+    const code = parseInt(data.response && data.response.status);
+    if (code === 500) {
+      error("500");
+    }
+  });
 };

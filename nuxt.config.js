@@ -40,9 +40,16 @@ export default {
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
-
+  // publicRuntimeConfig: {
+  //   API_URL: "http://localhost:4000",
+  //   FIREBASE_API_KEY: "AIzaSyB9-qd-I7C8aSfFQ6N75c3Vd6QvIkYvDqM"
+  // },
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [],
+  buildModules: ["@nuxtjs/dotenv"],
+
+  dotenv: {
+    filename: `.env.${process.env.NODE_ENV}`
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ["@nuxtjs/axios", "@nuxtjs/style-resources"],
@@ -93,10 +100,10 @@ export default {
       path: "/auth",
       handler: "~/server/auth.js"
     }
-  ],
-  env: {
-    firebaseApiKey: "AIzaSyB9-qd-I7C8aSfFQ6N75c3Vd6QvIkYvDqM"
-  }
+  ]
+  // env: {
+  //   firebaseApiKey: "AIzaSyB9-qd-I7C8aSfFQ6N75c3Vd6QvIkYvDqM"
+  // }
 
   // router: {
   //   extendRoutes(routes, resolve) {

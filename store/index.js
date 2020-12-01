@@ -20,7 +20,7 @@ export const actions = {
     commit("set_courses", data);
   },
   nuxtServerInit({ commit }, context) {
-    console.log("nuxtServerInit Active", new Date().getTime());
+    // console.log("nuxtServerInit Active", new Date().getTime());
     //這邊是給 Oauth 回來時提早觸發
     if (context.query.id_token && context.query.refresh_token) {
       const id_token_Decode = jwtDecode(context.query.id_token);
