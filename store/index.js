@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import Cookie from "js-cookie";
+import API from "~/api.js";
 
 export const state = () => ({
   data: {},
@@ -18,6 +19,20 @@ export const actions = {
   async getCourses({ commit }) {
     const { data } = await this.$axios.get("/api/courses");
     commit("set_courses", data);
+  },
+  async setCoursesList({ commit }) {
+    const method = API.getCoursesList.method;
+    const url = API.getCoursesList.url;
+    try {
+      const { data } = await this.$axios[method](url);
+      const courses = Object.keys(data)
+        .reduce((arr, cur) => [...arr, { ...data[cur], id: cur }], [])
+        .sort((a, b) => (a.order > b.order ? 1 : -1));
+      commit("set_courses", { courses });
+    } catch (error) {
+      console.log(error.response, "error");
+      console.log("TO DO error");
+    }
   },
   nuxtServerInit({ commit }, context) {
     // console.log("nuxtServerInit Active", new Date().getTime());

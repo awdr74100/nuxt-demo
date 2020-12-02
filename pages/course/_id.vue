@@ -3,7 +3,7 @@
     <div class="course_main is-clearfix">
       <div class="course_left master">
         <div class="course_title is-clearfix">
-          <h1 class="is-pulled-left">課程名稱</h1>
+          <h1 class="is-pulled-left">{{ get_courses.name }}</h1>
           <div class="button_parent">
             <button class="button is-pulled-right">
               <span class="icon">
@@ -20,7 +20,9 @@
                   class="has-ratio"
                   width="640"
                   height="360"
-                  src="https://www.youtube.com/embed/YE7VzlLtp-4?showinfo=0"
+                  :src="
+                    `https://www.youtube.com/embed/${get_courses_item.youtube_id}?showinfo=0`
+                  "
                   frameborder="0"
                   allowfullscreen
                 ></iframe>
@@ -50,7 +52,7 @@
             </div>
             <div class="info_content">
               <div class="content">
-                資料1
+                {{ get_courses.introduction }}
               </div>
             </div>
           </div>
@@ -63,17 +65,17 @@
         </div>
         <div class="course_item_parent" style="color:#4a4a4a;">
           <div
-            @click="clickItem(n)"
-            v-for="n in 10"
-            :key="n"
-            :class="{ active: n == itemActive }"
+            @click="clickItem(index + 1)"
+            v-for="(item, index) in coursesItem"
+            :key="index + 1"
+            :class="{ active: index + 1 == itemActive }"
             class="course_item"
           >
             <div class="course_item_station">
-              <span class="course_item_number">{{ n }}</span>
+              <span class="course_item_number">{{ index + 1 }}</span>
             </div>
             <div class="course_item_name">
-              分類名稱
+              {{ item.name }}
             </div>
           </div>
         </div>
@@ -84,43 +86,67 @@
 
 <script>
 import { sleep } from "~/assets/js/tool";
+import API from "~/api.js";
 
 export default {
   name: "course-id",
   data() {
     return {
       tabActive: 0,
-      itemActive: 0
+      itemActive: 1,
+      coursesItem: []
     };
   },
-  async asyncData() {
-    // await sleep(500);
+  async fetch() {
+    if (!this.$store.state.courses.length) {
+      return this.$store.dispatch("setCoursesList");
+    }
   },
-  created() {},
+  async asyncData({ $axios, route }) {
+    const id = route.params.id;
+    const method = API.getCoursesItem.method;
+    const url = API.getCoursesItem.url.replace(":id.json", id + ".json");
+    try {
+      const { data } = await $axios[method](url);
+      return { id, coursesItem: data.item };
+    } catch (error) {
+      console.log(error);
+    }
+  },
   mounted() {
     this.itemActive = this.$route.query.item || 1;
   },
-  computed: {},
   methods: {
     clickItem(item) {
       if (item == this.itemActive) return;
       this.itemActive = item;
-      this.$router.push({
-        query: {
-          item: item
-        }
-      });
+      this.$router.push({ query: { item: item } });
     },
     setTab(index) {
       this.tabActive = index;
     }
   },
-  watch: {
-    $route(to, from) {
-      this.itemActive = to.query.item;
+  computed: {
+    get_courses() {
+      const vm = this;
+      return {
+        ...vm.$store.state.courses.filter((item, index) => item.id === vm.id)[0]
+      };
+    },
+    get_courses_item() {
+      const vm = this;
+      return {
+        ...vm.coursesItem.filter(
+          (item, index) => vm.itemActive === index + 1
+        )[0]
+      };
     }
   },
-  components: {}
+  watch: {
+    $route(to, from) {
+      this.itemActive = parseInt(to.query.item, 10);
+    }
+  }
 };
 </script>
 

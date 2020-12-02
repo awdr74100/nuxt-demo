@@ -4,7 +4,7 @@ const axios = require("axios").default;
 const qs = require("querystring");
 require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
-console.log(process.env.FIREBASE_API_KEY);
+// console.log(process.env.FIREBASE_API_KEY);
 
 var google_client_id =
   "248540701436-ae6sleso3dkvoval8v7rgg4pksspp9d8.apps.googleusercontent.com";

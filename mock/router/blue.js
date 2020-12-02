@@ -33,6 +33,8 @@ app.post(API.member.registered.url, async (req, res, next) => {
 //會員登入 with email / password
 app.post(API.member.login.url, async (req, res, next) => {
   await sleep(0);
+  console.log(req.body, "req.body");
+  console.log(req.params, "req.params");
   // res.status(200).send({
   //   code: 400,
   //   error: "not working field"
@@ -52,7 +54,7 @@ app.post(API.member.login.url, async (req, res, next) => {
 //使用 refresh token 換取 ID token
 app.post(API.member.exchangeToken.url, async (req, res, next) => {
   await sleep(0);
-  res.cookie("token", "ddddd", { httpOnly: true });
+  // res.cookie("token", "ddddd", { httpOnly: true });
   res.status(200);
   res.json({
     expires_in: "3600",
@@ -117,7 +119,6 @@ app.get(API.getCoursesList.url, async (req, res, next) => {
 //取得課程內容
 app.get(API.getCoursesItem.url, async (req, res, next) => {
   await sleep(0);
-  console.log(req.params.id, "req.params.id");
   res.status(200);
   res.json({
     item: [

@@ -9,16 +9,16 @@
 import { mapState } from "vuex";
 
 import CourseList from "~/components/CourseList/CourseList";
-import API from "@/api.js";
 
 export default {
   components: {
     CourseList
   },
-  asyncData() {},
-  // async fetch() {
-  //   await this.$store.dispatch("getCourses");
-  // },
+  async fetch() {
+    if (!this.$store.state.courses.length) {
+      return this.$store.dispatch("setCoursesList");
+    }
+  },
   methods: {
     loginModalSubmit({ modalTyple, name, email, password }) {
       console.log(modalTyple, name, email, password);
@@ -29,12 +29,6 @@ export default {
   },
   async created() {
     if (process.client) {
-      // try {
-      //   const { data } = await this.$axios.post(API.member.exchangeToken.url);
-      //   console.log(data);
-      // } catch (error) {
-      //   console.log(error);
-      // }
     }
   }
 };
