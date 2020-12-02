@@ -43,38 +43,27 @@ export default {
   },
   methods: {
     async loginModalSubmit({ modalTyple, email, password }) {
-      if (modalTyple === "login") {
-        this.$axios({
-          method: API.member.login.method,
-          url: API.member.login.url,
-          baseURL: process.env.FIREBASE_API_URL,
-          data: { email, password, returnSecureToken: true }
-        }).then(response => {
-          console.log(response.data);
-          this.openModal = false;
-          this.$store.commit("setUserLoggedIn", {
-            id_token: response.data.idToken,
-            refresh_token: response.data.refreshToken,
-            userUid: response.data.localId,
-            userName: response.data.email
-          });
+      const method =
+        modalTyple === "login"
+          ? API.member.login.method
+          : API.member.registered.method;
+      const url =
+        modalTyple === "login"
+          ? API.member.login.url
+          : API.member.registered.url;
+      const baseURL = process.env.FIREBASE_API_URL;
+      const payload = { email, password, returnSecureToken: true };
+      try {
+        const { data } = await this.$axios[method](url, payload, { baseURL });
+        this.openModal = false;
+        this.$store.commit("setUserLoggedIn", {
+          id_token: data.idToken,
+          refresh_token: data.refreshToken,
+          userUid: data.localId,
+          userName: data.email
         });
-      } else {
-        this.$axios({
-          method: API.member.registered.method,
-          url: API.member.registered.url,
-          baseURL: process.env.FIREBASE_API_URL,
-          data: { email, password, returnSecureToken: true }
-        }).then(response => {
-          console.log(response.data);
-          this.openModal = false;
-          this.$store.commit("setUserLoggedIn", {
-            id_token: response.data.idToken,
-            refresh_token: response.data.refreshToken,
-            userUid: response.data.localId,
-            userName: response.data.email
-          });
-        });
+      } catch (error) {
+        console.log(error);
       }
     },
     loginClick() {

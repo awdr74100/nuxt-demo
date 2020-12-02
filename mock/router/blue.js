@@ -18,8 +18,8 @@ app.get("/", async (req, res, next) => {
 //會員註冊 with email / password
 app.post(API.member.registered.url, async (req, res, next) => {
   await sleep(0);
-  console.log(req.body, "req.body");
-  console.log(req.params, "req.params");
+  // console.log(req.body, "req.body");
+  // console.log(req.params, "req.params");
   res.status(200);
   res.json({
     idToken: "[ID_TOKEN]",
@@ -33,12 +33,8 @@ app.post(API.member.registered.url, async (req, res, next) => {
 //會員登入 with email / password
 app.post(API.member.login.url, async (req, res, next) => {
   await sleep(0);
-  console.log(req.body, "req.body");
-  console.log(req.params, "req.params");
-  // res.status(200).send({
-  //   code: 400,
-  //   error: "not working field"
-  // });
+  // console.log(req.body, "req.body");
+  // console.log(req.params, "req.params");
   res.status(200);
   res.json({
     localId: "ZY1rJK0eYLg...",
@@ -69,7 +65,7 @@ app.post(API.member.exchangeToken.url, async (req, res, next) => {
 //取得課程資訊
 app.get(API.getCourses.url, async (req, res, next) => {
   await sleep(0);
-  console.log(req.params.name, "req.params.name");
+  // console.log(req.params.name, "req.params.name");
   res.status(200);
   res.json({
     color: "#f52e36",
