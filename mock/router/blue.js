@@ -33,8 +33,11 @@ app.post(API.member.registered.url, async (req, res, next) => {
 //會員登入 with email / password
 app.post(API.member.login.url, async (req, res, next) => {
   await sleep(0);
-
-  res.status(400);
+  // res.status(200).send({
+  //   code: 400,
+  //   error: "not working field"
+  // });
+  res.status(200);
   res.json({
     localId: "ZY1rJK0eYLg...",
     email: "[user@example.com]",

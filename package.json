@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt --open",
-    "build": "nuxt build",
+    "dev": "cross-env NODE_ENV=development nuxt --open",
+    "prod": "cross-env NODE_ENV=production nuxt --open",
+    "build": "cross-env NODE_ENV=production nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
@@ -14,6 +15,7 @@
     "@nuxtjs/proxy": "^2.0.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "bulma": "^0.9.1",
+    "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.8.0",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",

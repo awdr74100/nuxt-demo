@@ -29,12 +29,12 @@ export default {
   },
   async created() {
     if (process.client) {
-      try {
-        const { data } = await this.$axios.post(API.member.exchangeToken.url);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
+      // try {
+      //   const { data } = await this.$axios.post(API.member.exchangeToken.url);
+      //   console.log(data);
+      // } catch (error) {
+      //   console.log(error);
+      // }
     }
   }
 };

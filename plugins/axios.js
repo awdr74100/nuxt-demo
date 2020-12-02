@@ -18,11 +18,12 @@ export default ({ $axios, redirect, error, $config }) => {
   $axios.setBaseURL(process.env.API_URL);
   $axios.onRequest(config => {
     config.params = { key: process.env.FIREBASE_API_KEY };
-    config.withCredentials = true;
+    // config.withCredentials = true;
   });
 
   $axios.onResponse(config => {});
   $axios.onError(data => {
+    // console.dir(data);
     const code = parseInt(data.response && data.response.status);
     if (code === 500) {
       error("500");

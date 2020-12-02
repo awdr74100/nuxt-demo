@@ -18,6 +18,8 @@ import Header from "~/components/Header/Header";
 import Footer from "~/components/Footer/Footer";
 import LoginModal from "~/components/Modal/LoginModal";
 
+import API from "~/api";
+
 export default {
   asyncData() {
     // console.log("layout asyncdata");
@@ -41,15 +43,38 @@ export default {
   },
   methods: {
     async loginModalSubmit({ modalTyple, email, password }) {
-      const mode = modalTyple === "login" ? "signInWithPassword" : "signUp";
-      const url = `https://identitytoolkit.googleapis.com/v1/accounts:${mode}?key=${process.env.firebaseApiKey}`;
-      const payload = { email, password, returnSecureToken: true };
-      try {
-        const { data } = await this.$axios.post(url, payload);
-        this.openModal = false;
-        console.log(data);
-      } catch (error) {
-        console.log(error);
+      if (modalTyple === "login") {
+        this.$axios({
+          method: API.member.login.method,
+          url: API.member.login.url,
+          baseURL: process.env.FIREBASE_API_URL,
+          data: { email, password, returnSecureToken: true }
+        }).then(response => {
+          console.log(response.data);
+          this.openModal = false;
+          this.$store.commit("setUserLoggedIn", {
+            id_token: response.data.idToken,
+            refresh_token: response.data.refreshToken,
+            userUid: response.data.localId,
+            userName: response.data.email
+          });
+        });
+      } else {
+        this.$axios({
+          method: API.member.registered.method,
+          url: API.member.registered.url,
+          baseURL: process.env.FIREBASE_API_URL,
+          data: { email, password, returnSecureToken: true }
+        }).then(response => {
+          console.log(response.data);
+          this.openModal = false;
+          this.$store.commit("setUserLoggedIn", {
+            id_token: response.data.idToken,
+            refresh_token: response.data.refreshToken,
+            userUid: response.data.localId,
+            userName: response.data.email
+          });
+        });
       }
     },
     loginClick() {
