@@ -1,4 +1,5 @@
 export default function(context) {
+  console.log(context.route.meta[0]);
   // console.log(context);
   // console.log("bang");
   // console.log(process.client);

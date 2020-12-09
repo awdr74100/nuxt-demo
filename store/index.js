@@ -8,7 +8,8 @@ export const state = () => ({
   isUserLoggedIn: false, //是否登入
   userPicture: "", //會員照片
   userName: "", //會員名稱
-  userUid: "" //會員 firebase 的 uid
+  userUid: "", //會員 firebase 的 uid
+  userFavorite: null
 });
 
 export const actions = {
@@ -34,7 +35,48 @@ export const actions = {
       console.log("TO DO error");
     }
   },
-  nuxtServerInit({ commit }, context) {
+  async saveMemberInfo({ state }, payload) {
+    const uid = (payload && payload.userUid) || state.userUid;
+    const _data = payload || {
+      name: state.userName,
+      picture: state.userPicture
+    };
+    const method = API.patchMemberInfo.method;
+    const url = API.patchMemberInfo.url.replace(":user_id.json", `${uid}.json`);
+    try {
+      const { data } = await this.$axios[method](url, { ..._data });
+      // console.log(data, "patchMemberInfo response");
+    } catch (error) {
+      console.log(error, "error");
+    }
+  },
+  async getUserFavorite({ state, commit }, payload) {
+    if (!state.isUserLoggedIn) return;
+    const uid = state.userUid;
+    const method = API.getMemberInfo.method;
+    const url = API.getMemberInfo.url.replace(":user_id.json", `${uid}.json`);
+    try {
+      const { data } = await this.$axios[method](url);
+      commit("set_userFavorite", data.favorite);
+      // console.log(state.userFavorite, "state.userFavorite");
+    } catch (error) {
+      console.log(error, "error");
+    }
+  },
+  async updateUserFavorite({ state }, payload) {
+    const uid = state.userUid;
+    const method = API.patchMemberInfo.method;
+    const url = API.patchMemberInfo.url.replace(":user_id.json", `${uid}.json`);
+    try {
+      const { data } = await this.$axios[method](url, {
+        favorite: state.userFavorite
+      });
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  nuxtServerInit({ commit, dispatch }, context) {
     // console.log("nuxtServerInit Active", new Date().getTime());
     //這邊是給 Oauth 回來時提早觸發
     if (context.query.id_token && context.query.refresh_token) {
@@ -46,6 +88,7 @@ export const actions = {
         userPicture: id_token_Decode.picture,
         userName: id_token_Decode.name
       });
+      dispatch("saveMemberInfo");
       context.app.$cookies.set("id_token", context.query.id_token);
       context.app.$cookies.set("refresh_token", context.query.refresh_token);
       context.app.$cookies.set("userUid", id_token_Decode.user_id);
@@ -99,6 +142,9 @@ export const mutations = {
     Cookie.remove("userName");
     this.$router.push({ name: "index" });
     // $nuxt.$router.push({ name: "index" });
+  },
+  set_userFavorite: (state, payload) => {
+    state.userFavorite = payload || {};
   }
 };
 

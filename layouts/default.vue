@@ -42,7 +42,7 @@ export default {
     };
   },
   methods: {
-    async loginModalSubmit({ modalTyple, email, password }) {
+    async loginModalSubmit({ modalTyple, name, email, password }) {
       const method =
         modalTyple === "login"
           ? API.member.login.method
@@ -55,13 +55,20 @@ export default {
       const payload = { email, password, returnSecureToken: true };
       try {
         const { data } = await this.$axios[method](url, payload, { baseURL });
-        this.openModal = false;
         this.$store.commit("setUserLoggedIn", {
           id_token: data.idToken,
           refresh_token: data.refreshToken,
           userUid: data.localId,
           userName: data.email
         });
+        if (modalTyple === "login") return;
+        //註冊寫入會員資料
+        this.$store.dispatch("saveMemberInfo", {
+          email,
+          name,
+          userUid: data.localId
+        });
+        this.openModal = false;
       } catch (error) {
         console.log(error);
       }

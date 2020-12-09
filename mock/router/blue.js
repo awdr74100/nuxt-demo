@@ -142,4 +142,29 @@ app.get(API.getCoursesItem.url, async (req, res, next) => {
   });
 });
 
+// 新增 /編輯會員資料
+app.patch(API.patchMemberInfo.url, async (req, res, next) => {
+  await sleep(0);
+  res.status(200);
+  console.log(req.body, "patchMemberInfo");
+  res.json({
+    name: "王小明",
+    email: "wayne1894.teach@gmail.com",
+    picture: "https://bulma.io/images/placeholders/128x128.png"
+  });
+});
+app.get(API.getMemberInfo.url, async (req, res, next) => {
+  await sleep(0);
+  res.status(200);
+  console.log(req.params, "getMemberInfo");
+  res.json({
+    name: "王小明",
+    email: "wayne1894.teach@gmail.com",
+    picture: "https://bulma.io/images/placeholders/128x128.png",
+    favorite: {
+      "-M7CgU5r4tKOoVQXjT4c": true
+    }
+  });
+});
+
 module.exports = app;

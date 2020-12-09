@@ -6,14 +6,11 @@ require("dotenv").config({ path: `.env.${process.env.NODE_ENV}` });
 
 // console.log(process.env.FIREBASE_API_KEY);
 
-var google_client_id =
+const google_client_id =
   "248540701436-ae6sleso3dkvoval8v7rgg4pksspp9d8.apps.googleusercontent.com";
-var google_secret_id = "TL8ShMS9gbuie8G3n_a8o_Mo"; //這個一定不能曝露到客戶端!!!
-var firebaseApiKey = process.env.FIREBASE_API_KEY; //填上firebase 的 api key (不能填 nuxt.config.js 裡的 process env)
-
-var process_url = process.env.WEB_URL; //填上你開發環境的網址
-if (process.env.NODE_ENV == "production")
-  process_url = "https://wayne1894nuxt.club"; //填上你生產環境的網址
+const google_secret_id = "TL8ShMS9gbuie8G3n_a8o_Mo"; //這個一定不能曝露到客戶端!!!
+const firebaseApiKey = process.env.FIREBASE_API_KEY; //填上firebase 的 api key (不能填 nuxt.config.js 裡的 process env)
+const process_url = process.env.WEB_URL
 
 app.get("/", (req, res) => {
   var referer = req.headers.referer; //前端請求過來的路徑

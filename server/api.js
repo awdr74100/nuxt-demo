@@ -2,9 +2,6 @@ const express = require("express");
 const app = express();
 const axios = require("axios").default;
 
-// app.get("/", (req, res) => {
-//   res.send({ message: "Bang" });
-// });
 app.get("/test", (req, res) => {
   res.send({ title: "Roya", message: "Hello World" });
 });

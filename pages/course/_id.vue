@@ -5,7 +5,12 @@
         <div class="course_title is-clearfix">
           <h1 class="is-pulled-left">{{ get_courses.name }}</h1>
           <div class="button_parent">
-            <button class="button is-pulled-right">
+            <button
+              v-if="this.$store.state.isUserLoggedIn"
+              :class="{ 'is-link': this.favicon_active }"
+              class="button is-pulled-right"
+              @click="setFavorite"
+            >
               <span class="icon">
                 <i class="far fa-heart"></i>
               </span>
@@ -88,6 +93,14 @@
 import { sleep } from "~/assets/js/tool";
 import API from "~/api.js";
 
+let coursesSearch = (courses, id) => {
+  let courses_data = {};
+  courses.forEach(i => {
+    if (i.id === id) courses_data = i;
+  });
+  return courses_data;
+};
+
 export default {
   name: "course-id",
   data() {
@@ -97,10 +110,21 @@ export default {
       coursesItem: []
     };
   },
+  validate(context) {
+    const { id } = context.route.params;
+    if (!id) context.redirect("/");
+    return true;
+  },
   async fetch() {
-    if (!this.$store.state.courses.length) {
-      return this.$store.dispatch("setCoursesList");
+    if (this.$store.state.userFavorite === null) {
+      await this.$store.dispatch("getUserFavorite");
     }
+    const { id } = this.$nuxt.context.route.params;
+    if (!this.$store.state.courses.length) {
+      await this.$store.dispatch("setCoursesList");
+    }
+    const courses = coursesSearch(this.$store.state.courses, id);
+    if (!courses.id) this.$nuxt.context.redirect("/");
   },
   async asyncData({ $axios, route }) {
     const id = route.params.id;
@@ -124,14 +148,21 @@ export default {
     },
     setTab(index) {
       this.tabActive = index;
+    },
+    setFavorite() {
+      if (this.$store.state.userFavorite === null) return;
+      //先更新 vuex
+      this.$store.commit("set_userFavorite", {
+        ...this.$store.state.userFavorite,
+        [this.id]: !this.$store.state.userFavorite[this.id]
+      });
+      //更新Favorite
+      this.$store.dispatch("updateUserFavorite");
     }
   },
   computed: {
     get_courses() {
-      const vm = this;
-      return {
-        ...vm.$store.state.courses.filter((item, index) => item.id === vm.id)[0]
-      };
+      return coursesSearch(this.$store.state.courses, this.id);
     },
     get_courses_item() {
       const vm = this;
@@ -140,6 +171,12 @@ export default {
           (item, index) => vm.itemActive === index + 1
         )[0]
       };
+    },
+    favicon_active() {
+      return (
+        this.$store.state.userFavorite &&
+        this.$store.state.userFavorite[this.id]
+      );
     }
   },
   watch: {

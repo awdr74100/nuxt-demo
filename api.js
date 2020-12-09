@@ -30,6 +30,16 @@ const API = {
   getCoursesItem: {
     url: "/courses_item/:id.json",
     method: "get"
+  },
+  //新增 / 編輯會員資料
+  patchMemberInfo: {
+    url: "/users/:user_id.json",
+    method: "patch"
+  },
+  //取得會員資料
+  getMemberInfo: {
+    url: "/users/:user_id.json",
+    method: "get"
   }
 };
 
