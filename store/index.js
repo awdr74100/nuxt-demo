@@ -54,7 +54,10 @@ export const actions = {
     if (!state.isUserLoggedIn) return;
     const uid = state.userUid;
     const method = API.getMemberInfo.method;
-    const url = API.getMemberInfo.url.replace(":user_id.json", `${uid}.json`);
+    const url = `${API.getMemberInfo.url.replace(
+      ":user_id.json",
+      `${uid}.json`
+    )}?auth=${this.$cookies.get("id_token")}`;
     try {
       const { data } = await this.$axios[method](url);
       commit("set_userFavorite", data.favorite);
@@ -66,7 +69,10 @@ export const actions = {
   async updateUserFavorite({ state }, payload) {
     const uid = state.userUid;
     const method = API.patchMemberInfo.method;
-    const url = API.patchMemberInfo.url.replace(":user_id.json", `${uid}.json`);
+    const url = `${API.patchMemberInfo.url.replace(
+      ":user_id.json",
+      `${uid}.json`
+    )}?auth=${this.$cookies.get("id_token")}`;
     try {
       const { data } = await this.$axios[method](url, {
         favorite: state.userFavorite
