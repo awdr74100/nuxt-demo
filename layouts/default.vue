@@ -61,6 +61,7 @@ export default {
           userUid: data.localId,
           userName: data.email
         });
+        this.openModal = false;
         if (modalTyple === "login") return;
         //註冊寫入會員資料
         this.$store.dispatch("saveMemberInfo", {
@@ -68,7 +69,6 @@ export default {
           name,
           userUid: data.localId
         });
-        this.openModal = false;
       } catch (error) {
         console.log(error);
       }
